@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        h1 {
+            color: white;
+        }
+
+        .navbar {
+            justify-content: center;
+        }
+        .container{
+            width: 50%;
+            align-items: center;
+        }
+        .form{
+            justify-items: center;
+        }
+        .btn{
+            width: 100%;
+        }
+        .card-text{
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark" style="text-align: center;">
+        <h1>Weather App</h1>
+    </nav>
+    {% if messages %}
+            {% for msg in messages  %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Typed City</strong> Not Found.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+    {% endif %}
+    <div class="container pt-5">
+        <form class="form" action="/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="City Name" name="city">
+            </div>
+            <button type="submit" class="btn btn-primary">Check Weather Status</button>
+        </form>
+    </div>
+
+    {% if city %}
+    <div class="container pt-5 d-flex justify-content-around">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+              <h2 class="card-title">{{city}}</h2>
+              <p class="card-text"><img src="https://openweathermap.org/img/w/{{icon}}.png">{{description}}</p>
+              <p class="card-text">{{temp}} ° C</p>
+            </div>
+          </div>
+    </div>
+    {% endif %}
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</html>
