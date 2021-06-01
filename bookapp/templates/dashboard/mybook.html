@@ -1,0 +1,195 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <nav class="pcoded-navbar">
+            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+            <div class="pcoded-inner-navbar main-menu">
+
+                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li>
+                        <a href="/dashboard">
+                            <span class="pcoded-micon"><i class="fas fa-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/dashboard/mybooks">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">My Books</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="/dashboard/allusers">
+                            <span class="pcoded-micon"><i class="fas fa-users"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">All Users</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="/dashboard/allbook">
+                            <span class="pcoded-micon"><i class="far fa-books"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Book Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/allnotes">
+                            <span class="pcoded-micon"><i class="fas fa-sticky-note"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Note Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addbook">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Book</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addnote">
+                            <span class="pcoded-micon"><i class="fas fa-plus-square"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Note</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/profile">
+                            <span class="pcoded-micon"><i class="fas fa-user"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Profile</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+        </nav>
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="page-header card">
+                            <div class="card-block">
+                                <ul class="breadcrumb-title p-t-10">
+                                    <li class="breadcrumb-item">
+                                        <a href="/dashboard/mybooks"> <i class="fa fa-home"></i> </a>
+                                    </li>
+                                    <li class="breadcrumb-item">My Books</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="page-body">
+                            <div class="row">
+                                <!-- order-card end -->
+                                <!-- tabs card start -->
+                                <div class="col-sm-12">
+                                    <div class="card tabs-card">
+                                        <div class="card-block p-0">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs md-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#mybooks"
+                                                        role="tab"></i>My Books</a>
+                                                    <div class="slide"></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#mynotes" role="tab">My
+                                                        Notes</a>
+                                                    <div class="slide"></div>
+                                                </li>
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content card-block">
+                                                <div class="tab-pane active" id="mybooks" role="tabpanel">
+
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            {% csrf_token %}
+                                                            <tr>
+                                                                <th>Type</th>
+                                                                <th>ISBN</th>
+                                                                <th>Book Name</th>
+                                                                <th>Author</th>
+                                                                <th>Date</th>
+                                                                <th>Pages</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            {% for book in mybooks %}
+                                                            <tr>
+                                                                <td>{{book.type}}</td>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td>{{book.no_pages}}</td>
+
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                            
+                                                                    <button class="label label-danger btn-delete"
+                                                                        style="cursor: pointer;border: none;"
+                                                                        data-id="{{book.isbn}}" data-toggle="tooltip"
+                                                                        title="Delete"><i
+                                                                            class="fas fa-trash-alt"></i></button></td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="mynotes" role="tabpanel">
+
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            {% csrf_token %}
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Note Name</th>
+                                                                <th>Pages</th>
+                                                                <th>Date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            {% for note in mynotes %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{note.note_name}}</td>
+                                                                <td>{{note.no_pages}}</td>
+                                                                <td>{{note.date_upload.date}}</td>
+                                                                <td><a href ="{{note.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{note.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    <button class="label label-danger btn-delete-note"
+                                                                    style="cursor: pointer;border: none;"
+                                                                    data-id="{{note.file_id}}" data-toggle="tooltip"
+                                                                    title="Delete"><i
+                                                                        class="fas fa-trash-alt"></i></button></td>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tabs card end -->
+                            </div>
+                        </div>
+
+                        <div id="styleSelector">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

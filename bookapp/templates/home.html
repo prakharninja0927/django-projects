@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Home - Page</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
+  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.0.2/aos.css"
+    integrity="sha512-ksbpl5EUb4HLEKUNItsPMT/Ih6KcISE53GbYOu3xFUVYvTSSX5AJxTI2aigdQm9uNSkSsRMHsSGNKppkt691lw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'CSS/home.css'%}" rel="stylesheet">
+  
+</head>
+
+<body>
+  <button type="button" class="mobile-nav-toggle d-lg-none">
+    <i class="fa fa-bars"></i>
+  </button>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+      <div class="logo mr-auto">
+        <h1 class="text-light"><a href="index.html"><span>BookApp</span></a></h1>
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">purpose</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+
+          <li class="get-started"><a href="/register">Register</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">Get Best Book From BookApp</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">You'll get the best programming books here very easily<br><br>
+            <span class="hashtags">#HubOfProgrammingBooks</span>
+          </h2>
+          <div data-aos="fade-up" data-aos-delay="800">
+            <a href="/register" class="btn-get-started scrollto" style="background-color: #3498db; color: white;">Register</a>
+            <a href="/login" class="btn-get-started scrollto">Login</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+          <img src="{% static 'images/home/hero-img.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients clients">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/color/144/000000/java-coffee-cup-logo.png" class="img-fluid" alt=""
+              data-aos="zoom-in">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/color/240/000000/python.png" class="img-fluid" alt="" data-aos="zoom-in"
+              data-aos-delay="100">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/color/480/000000/django.png" class="img-fluid" alt="" data-aos="zoom-in"
+              data-aos-delay="200">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/color/480/000000/c-plus-plus-logo.png" class="img-fluid" alt=""
+              data-aos="zoom-in" data-aos-delay="300">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/ultraviolet/480/000000/database-restore.png" class="img-fluid" alt=""
+              data-aos="zoom-in" data-aos-delay="400">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="https://img.icons8.com/color/480/000000/react-native.png" class="img-fluid" alt=""
+              data-aos="zoom-in" data-aos-delay="500">
+          </div>
+        </div>
+      </div>
+    </section><!-- End Clients Section -->
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about purpose">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Purpose</h2>
+        </div>
+        <div class="row content">
+          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start"
+            data-aos="fade-right" data-aos-delay="150">
+            <img src="{% static 'images/home/counts-img.svg' %}" alt="" class="img-fluid">
+          </div>
+          <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="150">
+            <p>
+              I'm a Student in L.D.College of Engineering,Ahmedabad.Currently I am studying BE in Information
+              Technology(IT).
+            </p>
+            <ul>
+              <li><i class="fal fa-check-double"></i> Here I want to describe Purpose behind this project that I have
+                made.</li>
+              <li><i class="fal fa-check-double"></i> I know the trouble while finding the best books for any technology
+                or programming language.</li>
+              <li><i class="fal fa-check-double"></i> Here I have tried my best to provide a platform which allow user
+                to download book as well as upload books they have. Which becomes helpfull to other users.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>Customer service should not be a department. It should be the entire company.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-user"></i></div>
+              <h4 class="title"><a href="">Admin Dashboard</a></h4>
+              <p class="description">Admin have an authority to look over entire app.Like user's information.It has all
+                authority over App.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="fas fa-plus"></i></div>
+              <h4 class="title"><a href="">Add Book</a></h4>
+              <p class="description">Adding book which has uniques ISBN(Registered) with author name and total pages.
+              </p>
+            </div>
+          </div>
+          
+          
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-plus"></i></div>
+              <h4 class="title"><a href="">Add Note</a></h4>
+              <p class="description">Option of adding notes which can be or has not registerd ISBN with total pages.</p>
+            </div>
+          </div> 
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fad fa-books"></i></div>
+              <h4 class="title"><a href="">Book Hub</a></h4>
+              <p class="description">There is an option of hub which redirect user to all books those are uploaded in
+                app.</p>
+            </div>
+          </div>         
+        </div>
+        
+        <div class="row mt-3">
+         
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fad fa-books"></i></div>
+              <h4 class="title"><a href="">Note Hub</a></h4>
+              <p class="description">There is an option of note hub which redirect user to all notes those are uploaded in app.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon"><i class="fas fa-download"></i></div>
+              <h4 class="title"><a href="">Download</a></h4>
+              <p class="description">From note hub and book hub uploaded books are downloadable with one click.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon"><i class="fas fa-eye"></i></div>
+              <h4 class="title"><a href="">See Pdf</a></h4>
+              <p class="description">From note hub and book hub uploaded books can be read with one click.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon"><i class="fas fa-trash-alt"></i></div>
+              <h4 class="title"><a href="">Delete</a></h4>
+              <p class="description">All users have an authority to delete note/book which they uploaded from their own account.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Team</h2>
+          <p>All our dreams can come true, if we have the courage to pursue them.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="member-img">
+                <img src="{% static 'images/home/about.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href="https://www.linkedin.com/in/prakhar-patel-2b3b591a4"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://github.com/prakharninja0927"><i class="fab fa-github"></i></a>
+                  <a href="https://patel-prakhar09.medium.com/"><i class="fab fa-medium"></i></a>
+                  <a href="https://www.instagram.com/prakhar0927/?hl=en"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Prakhar Patel</h4>
+                <span>Founder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section><!-- End Team Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Contact Us</h2>
+        </div>
+        
+        <div class="col-lg-12 col-md-12" data-aos="fade-up" data-aos-delay="300">
+          <form action="" method="post" role="form" class="php-email-form">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+                data-msg="Please enter at least 4 chars" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                data-rule="email" data-msg="Please enter a valid email" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required"
+                data-msg="Please write something for us" placeholder="Message"></textarea>
+              <div class="validate"></div>
+            </div>
+            <div class="mb-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-12  text-center">
+          <div class="copyright">
+            &copy; Copyright <strong>BookApp</strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            Designed by <a href="https://www.linkedin.com/in/prakhar-patel-2b3b591a4" target="_blank">Prakhar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </footer><!-- End Footer -->
+  <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+
+  
+
+  <!-- Vendor JS Files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"
+    integrity="sha512-d8F1J2kyiRowBB/8/pAWsqUl0wSEOkG5KATkVV4slfblq9VRQ6MyDZVxWl2tWd+mPhuCbpTB4M7uU/x9FlgQ9Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"
+    integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.0.2/aos.js"
+    integrity="sha512-678bHRnILWQudsPcjDbSoYtwimEk8yPq7BBWeJaFoSHPf7Ob7N7au8M49yY9Wbpmmi0PvDzf3Rca1mbmYQLAxQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/home.js'%}"></script>
+</body>
+</html>
+

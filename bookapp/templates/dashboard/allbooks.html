@@ -1,0 +1,673 @@
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <nav class="pcoded-navbar">
+            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+            <div class="pcoded-inner-navbar main-menu">
+                
+                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li>
+                        <a href="/dashboard">
+                            <span class="pcoded-micon"><i class="fas fa-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/mybooks">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">My Books</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li>
+                            <a href="/dashboard/allusers">
+                                <span class="pcoded-micon"><i class="fas fa-users"></i><b>D</b></span>
+                                <span class="pcoded-mtext" data-i18n="nav.dash.main">All Users</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>                        
+                    {% endif %}
+                    <li class="active">
+                        <a href="/dashboard/allbook">
+                            <span class="pcoded-micon"><i class="far fa-books"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Book Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/allnotes">
+                            <span class="pcoded-micon"><i class="fas fa-sticky-note"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Note Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addbook">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Book</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addnote">
+                            <span class="pcoded-micon"><i class="fas fa-plus-square"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Note</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/profile">
+                            <span class="pcoded-micon"><i class="fas fa-user"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Profile</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>                             
+                </ul>                                                                             
+        </nav>
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="page-header card">
+                            <div class="card-block">                                            
+                                <ul class="breadcrumb-title p-t-10">
+                                    <li class="breadcrumb-item">
+                                        <a href="/dashboard/allbook"> <i class="fa fa-home"></i> </a>
+                                    </li>
+                                   <li class="breadcrumb-item">All books</li>                                                      
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="page-body">
+                          <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card tabs-card">
+                                    <div class="card-block p-0">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs md-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#c" role="tab"></i>C</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#cpp" role="tab">C++</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#csharp" role="tab">C#</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#others" role="tab">other Books</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content card-block">
+                                            <div class="tab-pane active" id="c" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'C' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                
+                                                    </table>
+                                                </div>                                               
+                                            </div>
+                                            <div class="tab-pane" id="cpp" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                        {% ifequal book.type 'C++' %}                                                
+                                                            <tr>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.no_pages}}</td>
+                                                                <td>{{book.u_name}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr>   
+                                                        {% endifequal %}                                                                
+                                                    {% endfor %}                                                                                                                                 
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="csharp" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'C#' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                
+                                                    </table>
+                                                </div>                                               
+                                            </div>  
+                                            <div class="tab-pane" id="others" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'other' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                
+                                                    </table>
+                                                </div>                                               
+                                            </div>                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="card tabs-card">
+                                    <div class="card-block p-0">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs md-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#java" role="tab">java</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#python" role="tab">python</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#database" role="tab">Database</a>
+                                                <div class="slide"></div>
+                                            </li>                                                        
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content card-block">
+                                            <div class="tab-pane active" id="java" role="tabpanel">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                        {% ifequal book.type 'java' %}                                                
+                                                            <tr>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.no_pages}}</td>
+                                                                <td>{{book.u_name}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                </td>
+                                                                
+                                                            </tr>   
+                                                        {% endifequal %}                                                                
+                                                    {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                               
+                                            </div>
+                                            <div class="tab-pane" id="python" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'python' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="database" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'database' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                                
+                                            </div>                                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="card tabs-card">
+                                    <div class="card-block p-0">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs md-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#wdf" role="tab">Web Devlopment(Forntend)</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#wdb" role="tab">Web Devlopment(Backend)</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#cloud" role="tab">Cloud Computing</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#cyber" role="tab">Cyber Security</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content card-block">
+                                            <div class="tab-pane active" id="wdf" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'web(frontend)' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                   
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="wdb" role="tabpanel">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'web(backend)' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                               
+                                            </div>
+                                            <div class="tab-pane" id="cloud" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                        {% ifequal book.type 'cloud' %}                                                
+                                                            <tr>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.no_pages}}</td>
+                                                                <td>{{book.u_name}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr>   
+                                                        {% endifequal %}                                                                
+                                                    {% endfor %}                                                                                                                                 
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="cyber" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'cyber' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="card tabs-card">
+                                    <div class="card-block p-0">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs md-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#data" role="tab">Data Science</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#ml" role="tab">ML</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#ai" role="tab">AI</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#statistics" role="tab">statistics</a>
+                                                <div class="slide"></div>
+                                            </li>                                            
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content card-block">
+                                            <div class="tab-pane active" id="data" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'data' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                              
+                                            </div>
+                                            <div class="tab-pane" id="ml" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                        {% ifequal book.type 'ML' %}                                                
+                                                            <tr>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.no_pages}}</td>
+                                                                <td>{{book.u_name}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr>   
+                                                        {% endifequal %}                                                                
+                                                    {% endfor %}                                                                                                                                
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="ai" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                        {% ifequal book.type 'AI' %}                                                
+                                                            <tr>
+                                                                <td>{{book.isbn}}</td>
+                                                                <td>{{book.book_name}}</td>
+                                                                <td>{{book.author}}</td>
+                                                                <td>{{book.no_pages}}</td>
+                                                                <td>{{book.u_name}}</td>
+                                                                <td>{{book.date_upload.date}}</td>
+                                                                <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                    <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr>   
+                                                        {% endifequal %}                                                                
+                                                    {% endfor %}                                                                                                                                 
+                                                    </table>
+                                                </div>                                                
+                                            </div>
+                                            <div class="tab-pane" id="statistics" role="tabpanel">
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>ISBN</th>
+                                                            <th>Book Name</th>
+                                                            <th>Author</th>
+                                                            <th>Pages</th>
+                                                            <th>Uploader</th>
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        {% for book in books %} 
+                                                            {% ifequal book.type 'statistics' %}                                                
+                                                                <tr>
+                                                                    <td>{{book.isbn}}</td>
+                                                                    <td>{{book.book_name}}</td>
+                                                                    <td>{{book.author}}</td>
+                                                                    <td>{{book.no_pages}}</td>
+                                                                    <td>{{book.u_name}}</td>
+                                                                    <td>{{book.date_upload.date}}</td>
+                                                                    <td><a href ="{{book.file.url}}"class="label label-success" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                        <a href ="{{book.file.url}}"class="label label-success" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>   
+                                                            {% endifequal %}                                                                
+                                                        {% endfor %}                                                                                                                                  
+                                                    </table>
+                                                </div>                                                
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tabs card end -->
+                                <!-- social statustic start -->
+                            </div>
+                        </div>                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock content %}

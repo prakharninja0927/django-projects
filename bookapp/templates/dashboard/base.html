@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dashboard</title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description"
+    content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
+  <meta name="keywords"
+    content="free dashboard template, free admin, free bootstrap template, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+  <meta name="author" content="codedthemes">
+
+  <!-- Google font-->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!-- Required Fremwork -->
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/dashboard/bootstrap.min.css' %}">
+  <!-- themify-icons line icon -->
+  <!-- Style.css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/dashboard/style.css'%}">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"
+    integrity="sha512-fxF1t7b0mpb/ytjBeSu/OpgXxCVcX5/O8AJGYvHaWmNfi/lYLtttitFK17K4iKBva4iU9dcZ+BIV7dyD/nDdSw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .label{
+        font-size: 15px;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="theme-loader">
+    <div class="loader-track">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+  <!-- Pre-loader end -->
+  <div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+
+      <nav class="navbar header-navbar pcoded-header">
+        <div class="navbar-wrapper">
+          <div class="navbar-logo">
+            <a class="mobile-menu" id="mobile-collapse" href="#!">
+              <i class="fas fa-bars"></i>
+            </a>
+            <div class="mobile-search">
+              <div class="header-search">
+                <div class="main-search morphsearch-search">
+                  <div class="input-group">
+                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="">
+              {% if user.is_superuser %}
+              Admin Dashboard
+
+              {% else %}
+              Member Dashboard
+
+              {% endif %}
+            </a>
+            <a class="mobile-options">
+              <i class="fas fa-ellipsis-h"></i>
+            </a>
+          </div>
+          <div class="navbar-container container-fluid">
+            <ul class="nav-right">
+              <li class="user-profile header-notification">
+                <img src="{% static 'images/dashboard/avtar.png'%}" class="img-radius" alt="User-Profile-Image" style="border: 2px solid black;">
+                <a href="#">
+                  <span>{{user.name}}</span>
+                  <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="show-notification profile-notification">
+                  <li>
+                    <a href="/dashboard/profile">
+                      <i class="fas fa-user"></i> Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/logout">
+                      <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {% block content %}
+
+      {% endblock content %}
+  </div>
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+    integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <!-- jquery slimscroll js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"
+    integrity="sha512-37SbZHAnGzLuZV850k61DfQdZ5cnahfloYHizjpEwDgZGw49+D6oswdI8EX3ogzKelDLjckhvlK0QZsY/7oxYg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- modernizr js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"
+    integrity="sha512-lOtDAY9KMT1WH9Fx6JSuZLHxjC8wmIBxsNFL6gJPaG7sLIVoSO9yCraWOwqLLX+txsOw0h2cHvcUJlJPvMlotw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- am chart -->
+  <!-- Custom js -->
+  <script type="text/javascript" src="{% static 'js/dashboard/script.js'%}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.js"
+    integrity="sha512-vfE8OCUETP038fi2pHsLeJC/5xd48FyLsATJLulbdsCRBXgRWxA+0K9he4GClcPjT24vMJk1mFMFbjYS9J7NpA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{% static 'js/dashboard/pcoded.js'%}"></script>
+  <script src="{% static 'js/dashboard/vartical-demo.js'%}"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
+    integrity="sha512-2hIlk2fL+NNHkULe9gGdma/T5vSYk80U5tvAFSy3dGEl8XD4h2i6frQvHv5B+bm/Itmi8nJ6krAcj5FWFcBGig=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {% include 'ajax.html' %}
+</body>
+
+</html>

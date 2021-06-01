@@ -1,0 +1,180 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <nav class="pcoded-navbar">
+            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+            <div class="pcoded-inner-navbar main-menu">
+                
+                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li>
+                        <a href="/dashboard">
+                            <span class="pcoded-micon"><i class="fas fa-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/mybooks">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">My Books</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li class="active">
+                            <a href="/dashboard/allusers">
+                                <span class="pcoded-micon"><i class="fas fa-users"></i><b>D</b></span>
+                                <span class="pcoded-mtext" data-i18n="nav.dash.main">All Users</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>                        
+                    {% endif %}
+                    <li>
+                        <a href="/dashboard/allbook">
+                            <span class="pcoded-micon"><i class="far fa-books"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Book Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/allnotes">
+                            <span class="pcoded-micon"><i class="fas fa-sticky-note"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Note Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addbook">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Book</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addnote">
+                            <span class="pcoded-micon"><i class="fas fa-plus-square"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Note</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/profile">
+                            <span class="pcoded-micon"><i class="fas fa-user"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Profile</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>                             
+                </ul>                                                                      
+        </nav>
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="page-header card">
+                            <div class="card-block">                                            
+                                <ul class="breadcrumb-title p-t-10">
+                                    <li class="breadcrumb-item">
+                                        <a href="/dashboard/allusers"> <i class="fa fa-home"></i> </a>
+                                    </li>
+                                   <li class="breadcrumb-item">All Users</li>                                                      
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="page-body">
+                          <div class="row">
+                            <!-- order-card end -->                                                                                    
+                        <!-- tabs card start -->
+                                <div class="col-sm-10">
+                                    <div class="card tabs-card">
+                                        <div class="card-block p-0">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs md-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#admins" role="tab"><i class="fa fa-user"></i>Admins</a>
+                                                    <div class="slide"></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#profile3" role="tab"><i class="fa fa-users"></i>Members</a>
+                                                    <div class="slide"></div>
+                                                </li>                                                            
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content card-block">
+                                                <div class="tab-pane active" id="admins" role="tabpanel">
+
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Contact</th>
+                                                                <th>Date Joined</th>
+                                                                <th>No Of Books</th>    
+                                                                <th>No Of Notes</th>                                                                            
+
+                                                            </tr>
+                                                           {% for usr in admins  %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{usr.name}}</td>
+                                                                <td>{{usr.email}}</td>
+                                                                <td>{{usr.contact}}</td>
+                                                                <td>{{usr.date_joined.date}}</td>                                                                
+                                                                <td>{{usr.no_of_books}}</td>
+                                                                <td>{{usr.no_of_notes}}</td>
+                                                            </tr>                                                             
+                                                           {% endfor %}                                                                   
+                                                        </table>
+                                                    </div>                                                   
+                                                </div>
+                                                <div class="tab-pane" id="profile3" role="tabpanel">
+
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            {% csrf_token %}
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Contact</th>
+                                                                <th>Date Joined</th>
+                                                                <th>No Of Books</th>    
+                                                                <th>No of Notes</th>                                                                      
+                                                            </tr>
+                                                            {% for usr in members  %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{usr.name}}</td>
+                                                                <td>{{usr.email}}</td>
+                                                                <td>{{usr.contact}}</td>
+                                                                <td>{{usr.date_joined.date}}</td>                                                                
+                                                                <td>{{usr.no_of_books}}</td>
+                                                                <td>{{usr.no_of_notes}}</td>                                                                
+                                                            </tr>                                                           
+                                                           {% endfor %}
+                                                        </table>
+                                                    </div>                                                    
+                                                </div>                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tabs card end -->                                                                                                    
+                            </div>
+                        </div>
+
+                        <div id="styleSelector">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}

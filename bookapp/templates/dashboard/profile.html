@@ -1,0 +1,177 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <nav class="pcoded-navbar">
+            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+            <div class="pcoded-inner-navbar main-menu">
+                
+                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li>
+                        <a href="/dashboard">
+                            <span class="pcoded-micon"><i class="fas fa-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/mybooks">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">My Books</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li>
+                            <a href="/dashboard/allusers">
+                                <span class="pcoded-micon"><i class="fas fa-users"></i><b>D</b></span>
+                                <span class="pcoded-mtext" data-i18n="nav.dash.main">All Users</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>                        
+                    {% endif %}
+                    <li>
+                        <a href="/dashboard/allbook">
+                            <span class="pcoded-micon"><i class="far fa-books"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Book Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/allnotes">
+                            <span class="pcoded-micon"><i class="fas fa-sticky-note"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Note Hub</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addbook">
+                            <span class="pcoded-micon"><i class="fas fa-book"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Book</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/addnote">
+                            <span class="pcoded-micon"><i class="fas fa-plus-square"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Add Note</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/dashboard/profile">
+                            <span class="pcoded-micon"><i class="fas fa-user"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Profile</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>                             
+                </ul>                                                                                                                                                
+        </nav>
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <!-- Main-body start -->
+                <div class="main-body">
+                    <div class="page-wrapper">                                    
+                        <!-- Page-body start -->
+                        <div class="page-body">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- Typography card start -->
+                                    <div class="card">
+
+                                        <div class="card-block typography">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xl-6">
+                                                    <img src="{% static 'images/dashboard/profile.png'%}"/>
+                                                </div>
+                                                <div class="col-sm-12 col-xl-6">
+                                                    <div class="card-block">
+                                                        <h4 class="sub-title">
+
+                                                            {% if user.is_superuser %}
+                                                                Admin Profile
+                                                            {% else %}
+                                                                Member Profile
+                                                            {% endif %}
+                                                        </h4>
+                                                        <div>
+                                                            <div class="form-group row">
+                                                                
+                                                                <label
+                                                                    class="col-sm-3 col-form-label">Name
+                                                                    </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" placeholder="{{user.name}}" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label
+                                                                    class="col-sm-3 col-form-label">Joined Date
+                                                                    </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" placeholder="{{user.date_joined.date}}" readonly>
+                                                                </div>
+                                                            </div>                                                                        
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Email
+                                                                    </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control"   placeholder="{{user.email}}"                                                                                 
+                                                                        readonly>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="form-group row">
+                                                                <label
+                                                                    class="col-sm-3 col-form-label">Conact
+                                                                    </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" placeholder="{{user.contact}}" readonly>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Super User
+                                                                    </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" placeholder={% if user.is_superuser %}Yes{% else %}No{% endif %} readonly>
+                                                                </div>
+                                                            </div>  
+                                                            {% if user.is_superuser %}
+                                                                
+                                                            {% else %}
+                                                            <form method="POST" action="/dashboard/deleteuser">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="email" value ="{{user.email}}">
+                                                                <div class="form-group row">
+                                                                    <button type="submit" class="btn btn-danger btn-round">Delete Account</button>
+                                                                </div>                                                                                                                                                                                    
+                                                            </form>
+                                                            {% endif %}
+                                                        </div>                                                                   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Typography card end -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Page-body end -->
+                    </div>
+                </div>
+                <!-- Main-body end -->
+                <div id="styleSelector">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

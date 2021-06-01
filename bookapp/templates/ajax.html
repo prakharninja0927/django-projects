@@ -1,0 +1,44 @@
+<script>
+    $(document).on("click",".btn-delete",function(){
+        console.log(" delete button clicked")
+        // console.log($(this).attr('data-id'))
+        mythis = this
+        let csr = $("input[name=csrfmiddlewaretoken]").val()
+        let isbn = {isbn:$(this).attr('data-id'),csrfmiddlewaretoken:csr}
+        $.ajax({
+            url:"{% url 'deletebook' %}",
+            method:'POST',
+            data:isbn,
+            success:function(data){
+                // console.log(isbn)
+                if(data.status == 1){
+                    $(mythis).closest('tr').fadeOut();
+                }
+                if(data.status == 0){
+                    console.log("unable to delete data")
+                }
+            }
+        })
+    });   
+    $(document).on("click",".btn-delete-note",function(){
+        console.log(" delete button clicked")
+        // console.log($(this).attr('data-id'))
+        mythis = this
+        let csr = $("input[name=csrfmiddlewaretoken]").val()
+        let mydata = {file_id:$(this).attr('data-id'),csrfmiddlewaretoken:csr}
+        $.ajax({
+            url:"{% url 'deletenote' %}",
+            method:'POST',
+            data:mydata,
+            success:function(data){
+                // console.log(isbn)
+                if(data.status == 1){
+                    $(mythis).closest('tr').fadeOut();
+                }
+                if(data.status == 0){
+                    console.log("unable to delete data")
+                }
+            }
+        })
+    });
+</script>
